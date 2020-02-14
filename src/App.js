@@ -1,23 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { debounce } from "lodash";
 
 function App() {
+  const handleChangeText = debounce(text => {
+    setText(text);
+  }, 300);
+
+  const [text, setText] = useState("");
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <input type="text" onChange={e => handleChangeText(e.target.value)} />
+        <h4> Debouncing Effect Output</h4>
+        <p>{text}</p>
       </header>
     </div>
   );
